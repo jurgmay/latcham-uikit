@@ -1,0 +1,12 @@
+<!-- *** customSelectionField *** -->
+
+<div class="uk-margin-small">
+	<label class="uk-form-label" for="form-horizontal-select" ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name | r}}</label>
+	<div class="uk-form-controls" ng-class="{'uk-select':((customfield.Prefix && !hideprefix) || (customfield.Suffix && !hidesuffix))}">
+		<span class="uk-margin-small-right" ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix | r}}</span>
+		<select class="uk-select uk-margin-small" ng-init="init()" ng-required="customfield.Required" ng-change="changed()" ng-model="item" ng-options="option.Value for option in customfield.Options" ng-if="customfield.Options">
+			<option value=""></option></select>
+		<input class="uk-input" type="text" ng-change="otherChanged()" ng-model="other" ng-show="customfield.isOtherSelected" autocomplete="off" ng-required="customfield.Required && customfield.isOtherSelected" />
+		<span class="uk-margin-small-left" ng-if="customfield.Suffix && !hidesuffix && !((customfield.Suffix | r) == '')">{{customfield.Suffix | r}}</span>
+	</div>
+</div>

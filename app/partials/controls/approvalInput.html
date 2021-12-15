@@ -1,0 +1,13 @@
+<!-- *** approvalInput *** -->
+
+<div>
+    <loadingindicator ng-show="loadingIndicator" title="Please wait while we process your request."></loadingindicator>
+    <textarea class="uk-textarea uk-margin-small" ng-model="order.ApprovalComment" ng-attr-placeholder="{{('Approval' | r) + ' ' +  ('Comments' | r) | xlat}}"></textarea>
+    <div class="">
+        <button class="uk-button uk-button-default" ng-click="editOrder()" ng-if="user.Permissions.contains('EditApprovalOrder')">{{'Edit' | r | xlat}}</button>
+        <button class="uk-button uk-button-default" ng-click="approveOrder()" ng-disabled="approveClicked">{{'Approve' | r | xlat}}</button>
+        <button class="uk-button uk-button-default" ng-click="declineOrder()">{{'Decline' | r | xlat}}</button>
+    </div>
+    <div class="view-error-message" ng-show="error">{{error}}</div>
+</div>
+<hr/>

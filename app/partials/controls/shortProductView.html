@@ -1,0 +1,33 @@
+<!-- *** shortProductView *** -->
+<div class="uk-card uk-card-default uk-grid-collapse uk-margin" uk-grid>
+	<div class="uk-card-media-left uk-cover-container uk-width-1-4 uk-background-accent-product">
+  	<a class="uk-link-reset" href="{{LineItem.Product.Type == 'Kit' ? 'kit' : 'product'}}/{{LineItem.Product.InteropID}}">
+	  	<img src="{{LineItem.Product.LargeImageUrl}}" alt="">
+    </a>
+	</div>
+
+	<div class="uk-width-3-4">
+    <div class="uk-card-body uk-padding-product-description">
+			<h3 class="uk-margin-small-bottom">
+				<a class="uk-link-reset" href="{{LineItem.Product.Type == 'Kit' ? 'kit' : 'product'}}/{{LineItem.Product.InteropID}}">{{LineItem.Product.Name}}</a>
+			</h3>
+
+			<p class="uk-text-small uk-margin-remove-top">Product Code: {{LineItem.Product.ExternalID}}</p>
+
+			<p ng-bind-html="trustedDescription(LineItem.Product)" ng-show="LineItem.Product.Description" />
+
+			<section class="hidden-xs hidden-sm">
+				<p ng-show="LineItem.Product.UnitOfMeasure">
+					{{'Unit of Measure' | r | xlat}}: {{LineItem.Product.UnitOfMeasure}}
+				</p>
+
+				<p class="uk-badge uk-padding-small uk-label-warning" ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
+					<span>{{'Quantity available:' | r | xlat}}&nbsp;{{inventoryDisplay(LineItem.Product, LineItem.Variant) | number : 0}}</span>
+				</p>
+			</section>
+
+			<a class="uk-button uk-button-primary uk-margin-small" href="{{LineItem.Product.Type == 'Kit' ? 'kit' : 'product'}}/{{LineItem.Product.InteropID}}">{{('View' | r) + ' ' + ('Product' | r) | xlat}}</a>
+
+		</div>
+  </div>
+</div>

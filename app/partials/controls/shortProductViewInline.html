@@ -1,0 +1,50 @@
+<!-- *** shortProductViewInline.html *** -->
+
+<div class="uk-container">
+    <div class="uk-text-center">
+        <a class="thumbnail" href="{{LineItem.Product.Type == 'Kit' ? 'kit' : 'product'}}/{{LineItem.Product.InteropID}}">
+            <figure ng-show="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl" >
+                <img ng-src="{{LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl}}"/>
+            </figure>
+            <div class="empty" ng-hide="LineItem.Variant.SmallImageUrl || LineItem.Product.SmallImageUrl">
+                <span class="fa empty"><i class="fa fa-camera"></i></span>
+            </div>
+        </a>
+    </div>
+    <div class="col-xs-12 text-left">
+        <div class="panel-body">
+            <h3 class="uk-text-center">{{LineItem.Product.Name}}</h3>
+            <div class="panel-footer">
+                <div>
+                    <p ng-bind-html="trustedDescription(LineItem.Product)" ng-show="LineItem.Product.Description" />
+                    <p ng-show="LineItem.PriceSchedule.PriceBreaks[0]" ng-if="!(user.Permissions.contains('HidePricing'))">
+                        {{LineItem.PriceSchedule.PriceBreaks[0].Quantity}}
+                        <span ng-show="LineItem.Product.QuantityMultiplier > 1">(x {{LineItem.Product.QuantityMultiplier}})</span>
+                        {{'for' | xlat}} {{LineItem.PriceSchedule.PriceBreaks[0].Price | culturecurrency}}
+                    </p>
+                    <p ng-show="LineItem.Product.UnitOfMeasure">
+                        {{'Unit of Measure' | r | xlat}}: {{LineItem.Product.UnitOfMeasure}}
+                    </p>
+
+                    <p ng-show="LineItem.Product.DisplayInventory && inventoryDisplay(LineItem.Product, LineItem.Variant) != undefined">
+                        {{'Quantity Available' | r | xlat}}: {{inventoryDisplay(LineItem.Product, LineItem.Variant) }}
+                    </p>
+                </div>
+                <a class="btn btn-default btn-block" href="product/{{LineItem.Product.InteropID}}">{{('View' | r) + ' ' + ('Product' | r) | xlat}}</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- .subfooter start -->
+<!-- ================ -->
+<div class="uk-container uk-margin-bottom uk-text-center" ng-show="isActive('catalog')">
+    <p class="uk-text-small">Powered by</p>
+    <p>
+        <img alt="Accent logo" src="https://www.four51.com/Themes/Custom/9837598c-9484-4abd-96bb-67077caec569/assets/sbc/accent-logo.png" style="display: inline-block; "/>
+    </p>
+    <p class="uk-text-small">
+        {{'Copyright' | xlat}} © {{year}} Accent. {{'All Rights Reserved' | xlat}}.
+    </p>
+</div>
+<!-- subfooter end -->

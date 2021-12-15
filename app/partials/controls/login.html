@@ -1,0 +1,87 @@
+<section>
+	<!-- main-container start -->
+	<!-- ==================== -->
+	<div class="uk-flex uk-flex-center uk-text-center uk-margin-medium-top">
+		<div class="uk-width-1-3 uk-card uk-card-body uk-card-default">
+			<div id="login_box">
+				<div class="animated bounceIn" id="login_form">
+					<!-- logo -->
+					<div class="" id="logo" style="height: 64px; margin-top: -6px;">
+						<a href="index.html"><img alt="Latcham logo" id="logo_img" src="https://www.four51.com/Themes/Custom/9837598c-9484-4abd-96bb-67077caec569/assets/latcham/latcham-logo.png" style="height: 100%;"></a>
+					</div>
+					<h3 class="uk-card-title">Logon</h3>
+					<form class="uk-form-stacked" id="login_form" name="login_form">
+						<p class="alert alert-info" id="451qa_msg_login"></p>
+						<div class="uk-margin">
+							<label ng-show="credentials.Username">{{'Username' | r}}</label>
+							<div class="uk-form-controls">
+								<input autofocus class="uk-input" type="text" ng-model="credentials.Username" placeholder="{{'Username' | r}}" />
+							</div>
+						</div>
+						<div class="uk-margin">
+							<label ng-show="credentials.Password">{{'Password' | r}}</label>
+							<div class="uk-form-controls">
+								<input class="uk-input" type="password" ng-model="credentials.Password" placeholder="{{'Password' | r}}" />
+							</div>
+						</div>
+
+						<div class="uk-margin">
+							<input ng-disabled="login_form.$invalid" class="uk-button uk-button-primary" id="451_btn_login" type="submit" value="{{buttonText}}" />
+						</div>
+
+						<div>
+							<p class="uk-alert" ng-show="showEmailHelp && (!EmailNotFoundException || !PasswordSecurityException)">
+								If you would like to be reminded of your {{'Username' | r}} or have the option to reset your {{'Password' | r}}, please provide your email address and your log on information will be emailed to you immediately.
+							</p>
+							<btn class="uk-button" ng-show="!showEmailHelp && !PasswordReset && !EmailNotFoundException && !PasswordSecurityException" ng-click="showEmailHelp = !showEmailHelp; buttonText = 'Submit'">
+								Need help logging on?
+							</btn>
+							<div class="" ng-show="showEmailHelp">
+								<div>
+									<label ng-show="credentials.Email">{{'Email' | r}}</label>
+									<input class="form-control" type="email" ng-model="credentials.Email" placeholder="{{'Email' | r}}" />
+								</div>
+							</div>
+							<btn class="uk-button" ng-show="showEmailHelp" ng-click="showEmailHelp = !showEmailHelp; buttonText = 'Logon'">
+								Return to logon
+							</btn>
+						</div>
+
+						<div>
+							<div class="view-form-icon" ng-show="PasswordSecurityException">
+								<div>
+									<label ng-show="credentials.CurrentPassword">Current {{'Password' | r}}</label>
+									<input class="form-control" name="current_password" type="password" ng-model="credentials.CurrentPassword" placeholder="Current {{'Password' | r}}" />
+								</div>
+								<div>
+									<label ng-show="credentials.NewPassword">New {{'Password' | r}}</label>
+									<input class="form-control" name="new_password" type="password" ng-model="credentials.NewPassword" placeholder="New {{'Password' | r}}" />
+								</div>
+								<div>
+									<label ng-show="credentials.ConfirmPassword">Confirm {{'Password' | r}}</label>
+									<input class="form-control" name="confirm_password" type="password" ng-model="credentials.ConfirmPassword"  placeholder="Confirm {{'Password' | r}}" ng-match="credentials.NewPassword" />
+									<inlineerror ng-show="login_form.confirm_password.$error.match" title="{{'Password' | r}} do not match!" />
+								</div>
+							</div>
+						</div>
+
+						<div>
+							<div class="view-form-icon" ng-show="PasswordReset">
+								<div>
+									<label ng-show="credentials.NewPassword">New {{'Password' | r}}</label>
+									<input class="form-control" ng-required="PasswordReset" name="new_password" type="password" ng-model="credentials.NewPassword" placeholder="New {{'Password' | r}}" />
+								</div>
+								<div>
+									<label ng-show="credentials.ConfirmPassword">Confirm {{'Password' | r}}</label>
+									<input class="form-control" ng-required="PasswordReset" name="confirm_password" type="password" ng-model="credentials.ConfirmPassword"  placeholder="Confirm {{'Password' | r}}" ng-match="credentials.NewPassword" />
+									<inlineerror ng-show="login_form.confirm_password.$error.match" title="{{'Password' | r}} do not match!" />
+								</div>
+							</div>
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

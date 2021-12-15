@@ -1,0 +1,107 @@
+/*
+Static file for Theme changes
+Version: 1.0
+Template: AccentUIkit
+*/
+
+/*
+UIkit Overrides
+*/
+
+p {
+  margin-bottom: 10px;
+}
+
+a:hover, .uk-link:hover {
+  text-decoration: none;
+}
+
+.uk-card-body+.uk-card-body {
+  border-top: 1px solid #e5e5e5;
+}
+
+.uk-padding-product-description {
+  padding: 20px 40px;
+}
+
+body {
+  font-weight: 300;
+}
+
+.uk-button-xsmall {
+    padding: 0 8px;
+    line-height: 24px;
+    font-size: .7rem;
+}
+
+.uk-button-success {
+    background-color: #32d296;
+    color: #fff;
+    border: 1px solid transparent;
+}
+
+.uk-form-label {
+    font-size: 0.975rem;
+    font-weight: 400;
+}
+
+.uk-legend {
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+
+/*
+Other
+*/
+
+.nav-border {
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #e2e2e2;
+}
+
+#cartDropdownList {
+    max-height: 280px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.cart-icon {
+    border-radius: 100%;
+    width: 42px;
+    height: 42px;
+    font-size: 18px;
+    line-height: 38px;
+}
+
+.cart-count {
+    position: absolute;
+    top: 12px;
+    right: 6px;
+}
+
+.uk-background-accent {
+  background-color: #53c3bd;
+}
+
+.uk-background-accent-product {
+  background-color: #e8e8e8;
+}
+
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+    color:rgba(57,57,57,0.7);
+}
+
+.flatpickr-day.prevMonthDay.disabled,
+.flatpickr-day.nextMonthDay.disabled {
+    color:rgba(57,57,57,0.3);
+}
+
+.uk-logo > img {
+  max-height: 64px;
+}
+
+.uk-logo-small > img {
+  max-height: 48px;
+}

@@ -1,0 +1,27 @@
+<!-- *** priceScheduleView *** -->
+
+<section>
+
+    <div ng-show="ps.PriceBreaks.length > 8">
+      <button uk-toggle="target: #priceTable" id="451qa_btn_showhide_psched" class="uk-button uk-button-default" type="button" ng-click="showPS = !showPS">
+        <span ng-show="!showPS" class="ng-binding">Hide {{'Price Schedule' | r | xlat}} <i class="fa fa-minus-circle"></i></span>
+        <span ng-show="showPS" class="ng-binding ng-hide">Show {{'Price Schedule' | r | xlat}} <i class="fa fa-plus-circle"></i></span>
+      </button>
+    </div>
+
+    <table id="priceTable" class="uk-table uk-table-small uk-table-divider">
+        <thead>
+            <tr>
+                <th class="uk-text-center">{{'Quantity' | r | xlat}}</th>
+                <th class="uk-text-center">{{'Price' | r | xlat}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="pb in ps.PriceBreaks">
+              <td>{{pb.Quantity * (ps.RestrictedQuantity ? p.QuantityMultiplier : 1)}}</td>
+              <td class="uk-text-right">{{pb.Price * (ps.RestrictedQuantity ? pb.Quantity : 1)| culturecurrency}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</section>

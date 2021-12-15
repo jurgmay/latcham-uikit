@@ -1,0 +1,31 @@
+<!-- *** categoryView *** -->
+
+<div id="page-start"></div>
+
+<!-- main-container start -->
+<!-- ==================== -->
+
+<section uk-height-viewport="expand: true" ng-class="isActive('catalog') ? 'uk-section-small' : 'uk-section uk-background-muted'">
+  <div class="uk-container">
+    <!-- page-title start -->
+    <!-- ================ -->
+    <div class="uk-text-center" ng-hide="isActive('catalog')">
+      <h1 class="uk-heading uk-text-uppercase">{{currentCategory.Name}}</h1>
+      <div class="uk-divider-small"></div>
+    </div>
+    <!-- page-title end -->
+
+    <div>
+      <loadingindicator ng-show="productLoadingIndicator" title="{{'Please wait while we fetch all products' | r | xlat}}"/>
+      <div class="uk-card-large uk-card-body uk-text-center" uk-card ng-hide="isActive('catalog') || productCount > 0 || productLoadingIndicator || currentCategory.SubCategories">
+        <h2 class="uk-text-center">There is nothing in this category.</h2>
+        <!-- Show the Back button. -->
+        <a href="" back-step="" class="uk-button uk-button-default"><span class="uk-icon" uk-icon="icon: arrow-left"></span>Go back</a>
+      </div>
+
+      <categorylistview></categorylistview>
+      <productlistview></productlistview>
+
+    </div>
+  </div>
+</section>

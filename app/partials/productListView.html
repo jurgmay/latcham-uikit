@@ -1,0 +1,51 @@
+<!-- *** productListView *** -->
+
+<section class="uk-section uk-section-xsmall" ng-show="products">
+    <div class="uk-container">
+
+		<loadingindicator ng-show="searchLoading" title="{{'Please wait while we fetch all products' | r | xlat}}" />
+
+		<!-- pagination start -->
+		<div ng-show="productCount > settings.pageSize" class="text-center">
+			<pagination page="settings.currentPage"
+				max-size="10"
+				rotate="false"
+				boundary-links="true"
+				total-items="productCount"
+				items-per-page="settings.pageSize"
+				direction-links="true"
+				previous-text="<"
+				next-text=">"
+				first-text="<<"
+				last-text=">>">
+			</pagination>
+		</div>
+		<!-- pagination end -->
+		
+		<!-- line items start -->
+		<div ng-show="currentCategory.InteropID">
+			<div class="uk-margin-medium" id="451_lst_prod" ng-repeat="product in products | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize | orderBy:sorter:direction">
+				<shortproductview p="product" user="user" />
+			</div>
+		</div>
+		<!-- line items end -->
+
+		<!-- pagination start -->
+		<div ng-show="productCount > settings.pageSize" class="text-center">
+			<pagination page="settings.currentPage"
+				max-size="10"
+				rotate="false"
+				boundary-links="true"
+				total-items="productCount"
+				items-per-page="settings.pageSize"
+				direction-links="true"
+				previous-text="<"
+				next-text=">"
+				first-text="<<"
+				last-text=">>">
+			</pagination>
+		</div>
+		<!-- pagination end -->
+
+	</div>
+</section>

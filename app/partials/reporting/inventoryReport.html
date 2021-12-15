@@ -1,0 +1,36 @@
+<!-- *** inventoryReport *** -->
+
+<div class="uk-container">
+  <div class="uk-form-horizontal">
+    <div class="uk-margin-small">
+      <label class="uk-form-label" for="form-horizontal-text">{{'Name' | r | xlat}}</label>
+      <div class="uk-form-controls">
+        <input required class="uk-input uk-form-width-large" id="form-horizontal-text" type="text" ng-model="report.Name" placeholder="{{'Name' | r | xlat}}" />
+        <button type="submit" ng-disabled="reportForm.$invalid" class="uk-button uk-button-primary">
+          <span>{{'Save' | r | xlat}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="uk-grid uk-child-width-1-2">
+    <div>
+      <div class="uk-form-horizontal">
+        <h3>{{'Conditions' | r | xlat}}</h3>
+        <div class="uk-margin-small">
+          <label class="uk-form-label">{{'Category' | r | xlat}}</label>
+          <div class="uk-form-controls">
+            <select class="uk-select uk-form-width-large" id="form-horizontal-select" ng-options="key as value for (key,value) in report.CategoryOptions" ng-model="report.Category"><option value=""></option></select>
+          </div>
+        </div>
+        <div class="uk-margin-small">
+          <span class="uk-form-label">{{('Include Inactive' | r) + ' ' +  ('Products' | r) | xlat}}</span>
+          <div class="uk-form-controls uk-form-controls-text">
+            <label>
+              <input class="uk-checkbox" type="checkbox" ng-model="report.IncludeInactiveProducts" placeholder="{{('Include Inactive' | r) + ' ' +  ('Products' | r) | xlat}}" />
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

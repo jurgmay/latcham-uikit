@@ -1,0 +1,240 @@
+<!-- *** orderSearchView *** -->
+
+<div id="page-start"></div>
+
+<section uk-height-viewport="expand: true" class="uk-section uk-background-muted">
+
+	<!-- main-container start -->
+	<!-- ==================== -->
+	<div class="uk-container">
+		<!-- page-title start -->
+		<!-- ================ -->
+		<div class="uk-text-center">
+			<h1 class="uk-heading uk-text-uppercase">Orders</h1>
+			<div class="uk-divider-small"></div>
+		</div>
+		<!-- page-title end -->
+
+		<div class="uk-text-center" ng-if="!hasStandardTypes && !hasReplenishmentTypes && !hasPriceRequestTypes">
+			<div>
+				<p>{{'Your search resulted in no records. Please refine your search.' | r | xlat}}</p>
+			</div>
+		</div>
+
+		<div uk-grid>
+			<div class="uk-width-1-4" ng-show="hasStandardTypes">
+				<div class="uk-card uk-card-small uk-card-default">
+					<div class="uk-card-header">
+						<h3 class="uk-card-title">{{Your + ' ' + ('Orders' | r) | xlat}}</h3>
+					</div>
+					<div class="uk-card-body">
+						<ul class="uk-list">
+							<li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'Standard'}" ng-show="criteria.Count">
+								<a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName | r | xlat}} Orders</a>&nbsp;&nbsp;<span class="uk-badge">{{criteria.Count}}</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="uk-width-1-4" ng-show="hasReplenishmentTypes">
+				<div class="uk-card uk-card-small uk-card-default">
+					<div class="uk-card-header">
+						<h3 class="uk-card-title">{{('Replenishment' | r) + ' ' + ('Orders' | r) | xlat}}</h3>
+					</div>
+					<div class="uk-card-body">
+						<ul>
+							<li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'Replenishment'}" ng-show="criteria.Count">
+								<a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName | r | xlat}} <span class="uk-badge" >{{criteria.Count}}</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="uk-width-1-4" ng-show="hasPriceRequestTypes">
+				<div class="uk-card uk-card-small uk-card-default">
+					<div class="uk-card-header">
+						<h3 class="uk-card-title">{{'Price Requests' | r | xlat}}</h3>
+					</div>
+					<div class="uk-card-body">
+						<ul>
+							<li ng-repeat="criteria in OrderSearchCriteria | filter:{Type:'PriceRequest'}" ng-show="criteria.Count">
+								<a ng-href="#" ng-click="OrderSearch($event,{{criteria}})">{{criteria.DisplayName | r | xlat}} <span class="uk-badge">{{criteria.Count}}</span></a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+			<div class="uk-width-3-4">
+				<div class="uk-card uk-card-small uk-card-default" ng-show="hasStandardTypes || hasReplenishmentTypes || hasPriceRequestTypes">
+					<div class="uk-card-header">
+						<h3 class="uk-card-title">{{('Search' | r) + ' ' + ('Orders' | r) | xlat}}</h3>
+					</div>
+
+					<div class="uk-form" role="form">
+						<div class="uk-card-body">
+							<div uk-grid>
+								<div class="uk-width-1-3">
+									<div class="has-feedback">
+										<label for="inputName" class="uk-form-label">{{'Order ID' | r | xlat}}</label>
+										<div class="uk-inline">
+											<input type="text" class="uk-input" ng-model="criteria.OrderID" placeholder="{{('Order' | r) + ' ' + ('ID' | r) | xlat}}" autocomplete="off">
+										</div>
+									</div>
+
+									<div class="has-feedback">
+										<label for="inputName" class="uk-form-label">{{('Ship' | r) + ' ' + ('Address' | r) | xlat}}</label>
+										<div class="uk-inline">
+											<input type="text" class="uk-input" ng-model="criteria.ShippingAddress" placeholder="{{('Shipping' | r) + ' ' + ('Address' | r) | xlat}}" autocomplete="off">
+										</div>
+									</div>
+								</div>
+
+								<div class="uk-width-1-3">
+									<div class="has-feedback">
+										<label for="inputName" class="uk-form-label">{{('Start' | r) + ' ' + ('Date' | r) | xlat}}</label>
+										<div class="uk-button uk-button-default uk-button-block uk-button-date uk-hidden@s"
+											 ng-click="$event.preventDefault();$event.stopPropagation();startopened = !startopened;"
+											 style="margin:0; height:40px; padding-top:8px;">
+											{{criteria.DateRangeFrom ? '' : 'Tap'}}
+											<span class="text-info">{{criteria.DateRangeFrom | date:user.Culture.DateFormat.short}}</span>
+										</div>
+										<div class="uk-inline">
+											<input name="daterangefrom" placeholder="{{('Start' | r) + ' ' + ('Date' | r) | xlat}}" ng-model="criteria.DateRangeFrom"
+												   type="text"
+												   class="uk-input"
+												   datepicker-popup="{{user.Culture.DateFormat.short}}"
+												   is-open="startopened"/>
+										</div>
+									</div>
+									<div class="has-feedback">
+										<label for="inputName" class="uk-form-label">{{('End' | r) + ' ' + ('Date' | r) | xlat}}</label>
+										<div class="uk-button uk-button-default uk-button-block uk-button-date uk-hidden@s"
+										 ng-click="$event.preventDefault();$event.stopPropagation();endopened = !endopened;"
+										 style="margin:0; height:40px; padding-top:8px;">
+										{{criteria.DateRangeTo ? '' : 'Tap'}}
+											<span class="text-info">{{criteria.DateRangeTo | date:user.Culture.DateFormat.short}}</span>
+										</div>
+										<div class="uk-inline">
+											<input name="daterangeto" placeholder="{{('End' | r) + ' ' + ('Date' | r) | xlat}}" ng-model="criteria.DateRangeTo"
+												   type="text"
+												   class="uk-input"
+												   datepicker-popup="{{user.Culture.DateFormat.short}}"
+												   is-open="endopened"
+												   min="criteria.DateRangeFrom"/>
+										</div>
+									</div>
+								</div>
+
+								<div class="uk-width-1-3 uk-alert-primary" uk-alert>
+									<div class="uk-alert-default">
+										<p><i class="fa fa-info-circle"></i> {{'Only display last n orders' | r | xlat}}</p>
+										<div>
+											<input class="uk-input" type="text" ng-model="criteria.LastN" placeholder="# {{'of' | xlat}} {{'Orders' | r | xlat}}" autocomplete="off" />
+										</div>
+									</div>
+								</div>
+							</div> <!-- row end -->
+							<div class="uk-margin-medium">
+								<div>
+									<button type="submit" class="uk-button uk-button-primary" ng-click="OrderSearch($event, criteria)">{{'Search' | r | xlat}}</button>
+								</div>
+							</div>
+						</div> <!-- uk-card-body end -->
+					</div> <!-- form end -->
+				</div>
+			</div> <!-- 2/3 card -->
+		</div> <!-- order types -->
+
+		<div>
+			<div>
+				<div class="uk-card uk-card-small uk-card-default" ng-show="showNoResults">
+					<div class="uk-card-header">
+						<h3 class="uk-card-title">
+							<span class="text-info" ng-show="orderSearchStat.Type">
+								{{(orderSearchStat.Type) + ' ' + ('Orders' | rl) | xlat}}:
+							</span>
+							{{orderSearchStat.DisplayName | r | xlat}}
+							<span ng-show="!orderSearchStat.Type">
+								{{'Search' | r | xlat}}
+							</span>
+						</h3>
+					</div>
+
+					<div class="uk-card-body">
+						<div class="">
+							<loadingindicator ng-show="pagedIndicator" />
+							<div ng-show="settings.listCount > settings.pageSize">
+								<pagination class="uk-pagination" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+											items-per-page="settings.pageSize" direction-links="true"></pagination>
+							</div>
+							<div>
+								<div>{{'Your search resulted in no records. Please refine your search.' | r | xlat}}</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> <!-- col -->
+		</div> <!-- row -->
+
+		<div class="uk-margin-medium">
+			<div class="">
+				<div class="uk-card uk-card-small uk-card-default" ng-show="orders">
+					<div class="uk-card-header">
+						<h3 class="uk-card-title">
+							<span ng-show="orderSearchStat.Type">
+								{{(orderSearchStat.Type) + ' ' + ('Orders' | rl) | xlat}}:
+							</span>
+							{{orderSearchStat.DisplayName | r | xlat}}
+							<span ng-show="!orderSearchStat.Type">
+								{{'Search' | r | xlat}}
+							</span>
+						</h3>
+					</div>
+
+					<div class="uk-card-body">
+						<div class="uk-container">
+							<loadingindicator ng-show="pagedIndicator" />
+
+							<div ng-show="settings.listCount > settings.pageSize && !pagedIndicator">
+								<pagination class="uk-pagination" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+											items-per-page="settings.pageSize" direction-links="true"></pagination>
+							</div>
+
+							<table class="uk-table uk-margin-remove">
+								<thead>
+									<tr>
+										<th class="uk-padding-remove-top ng-binding">Order {{'ID' | r | xlat}}</th>
+										<th class="uk-padding-remove-top ng-binding">{{'Type' | r | xlat}}</th>
+										<th class="uk-padding-remove-top ng-binding">{{'Status' | r | xlat}}</th>
+										<th class="uk-padding-remove-top ng-binding">{{'Submitted' | r | xlat}} By</th>
+										<th class="uk-padding-remove-top ng-binding">{{('Submitted' | r) + ' ' + ('Date' | r) | xlat}}</th>
+										<th class="uk-padding-remove-top ng-binding" ng-if="!(user.Permissions.contains('HidePricing'))">{{'Total' | r | xlat}}</th>
+									</tr>
+								</thead>
+								<tbody>
+
+								<tr ng-repeat="order in orders | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+										<td class="uk-padding-remove-top"><a ng-href="{{currentOrder.ID == order.ID ? 'cart' : 'order/' + order.ID}}">{{order.ExternalID || ('(unspecified)' | xlat)}}</a></td>
+										<td class="uk-padding-remove-top"><a ng-href="{{currentOrder.ID == order.ID ? 'cart' : 'order/' + order.ID}}">{{order.Type}}</a></td>
+										<td class="uk-padding-remove-top"><a ng-href="{{currentOrder.ID == order.ID ? 'cart' : 'order/' + order.ID}}">{{order.StatusText}}</a></td>
+										<td class="uk-padding-remove-top"><a ng-href="{{currentOrder.ID == order.ID ? 'cart' : 'order/' + order.ID}}">{{order.FromUserFirstName + ' ' + order.FromUserLastName}}</a></td>
+										<td class="uk-padding-remove-top"><a ng-href="{{currentOrder.ID == order.ID ? 'cart' : 'order/' + order.ID}}">{{order.DateSubmitted || order.DateCreated | date:user.Culture.DateFormat.long}}</a></td>
+										<td class="uk-padding-remove-top" ng-if="!(user.Permissions.contains('HidePricing'))"><a ng-href="{{currentOrder.ID == order.ID ? 'cart' : 'order/' + order.ID}}">{{order.Total | culturecurrency}}</a></td>
+									</tr>
+								</tbody>
+							</table>
+
+							<div ng-show="settings.listCount > settings.pageSize && !pagedIndicator">
+								<pagination class="uk-pagination" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+											items-per-page="settings.pageSize" direction-links="true"></pagination>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> <!-- col -->
+		</div> <!-- row end -->
+	</div> <!-- main container end -->
+</section>

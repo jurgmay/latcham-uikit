@@ -1,0 +1,58 @@
+<!-- *** dateRange *** -->
+
+<div class="">
+  <div class="uk-form-horizontal">
+    <div class="uk-margin-small">
+      <label class="uk-form-label" for="form-horizontal-text">{{('Start' | r) + ' ' + ('Date' | r) | xlat}}</label>
+      <div class="uk-form-controls">
+        <input placeholder="{{('Start' | r) + ' ' + ('Date' | r) | xlat}}" ng-model="fromdate"
+          ng-change="span = null"
+          type="text"
+          class="uk-input uk-form-width-small"
+          id="form-horizontal-text"
+          datepicker-popup="{{$parent.user.Culture.DateFormat.short}}"
+          is-open="startopened"
+          min="minDate"/>
+      </div>
+      <div class="uk-button uk-button-default uk-hidden@s"
+        ng-click="$event.preventDefault();$event.stopPropagation();startopened = !startopened;"
+        style="margin:0; height:40px; padding-top:0px;">
+        {{fromdate ? "" : "Tap"}}
+        <span class="uk-text-info">{{fromdate | date:$parent.user.Culture.DateFormat.short}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="">
+  <div class="uk-form-horizontal">
+    <div class="uk-margin-small">
+      <label class="uk-form-label" for="form-horizontal-text">{{('End' | r) + ' ' + ('Date' | r) | xlat}}</label>
+      <div class="uk-form-controls">
+        <input placeholder="{{('End' | r) + ' ' + ('Date' | r) | xlat}}" ng-model="todate"
+          ng-change="span = null"
+          type="text"
+          class="uk-input uk-form-width-small"
+          id="form-horizontal-text"
+          datepicker-popup="{{$parent.user.Culture.DateFormat.short}}"
+          is-open="endopened"
+          min="fromdate"/>
+      </div>
+      <div class="uk-button uk-button-default uk-hidden@s"
+        ng-click="$event.preventDefault();$event.stopPropagation();endopened = !startopened;"
+        style="margin:0; height:40px; padding-top:0px;">
+        {{todate ? "" : "Tap"}}
+        <span class="uk-text-info">{{todate | date:$parent.user.Culture.DateFormat.short}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="">
+  <div class="uk-form-horizontal">
+    <div class="uk-margin-small">
+      <label class="uk-form-label" for="form-horizontal-text">{{'Timespan' | r | xlat}}</label>
+      <div class="uk-form-controls">
+        <select class="uk-select" ng-options="key as (value | r | xlat) for (key,value) in options" ng-change="changed()" ng-model="span"><option value=""></option></select>
+      </div>
+    </div>
+  </div>
+</div>

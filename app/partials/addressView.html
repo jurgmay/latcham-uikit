@@ -1,0 +1,26 @@
+<!-- *** addressView *** -->
+
+<!-- main-container start -->
+<!-- ==================== -->
+<section uk-height-viewport="expand: true" class="uk-section uk-background-muted">
+	<!-- main-container start -->
+	<!-- ==================== -->
+	<div class="uk-container">
+		<!-- page-title start -->
+		<!-- ================ -->
+		<div class="uk-text-center">
+			<h1 class="uk-heading uk-text-uppercase">{{'Address' | r | xlat}}</h1>
+			<div class="uk-divider-small"></div>
+		</div>
+
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title">{{(address.ID ? 'Edit' : 'Add') + ' ' + ('Address' | r) | xlat}}</h3>
+			</div>
+			<div class="panel-body">
+				<addressinput address='address' user='user' return='return'></addressinput>
+			</div>
+		</div>
+
+	</div>
+</section>

@@ -1,0 +1,95 @@
+<!-- *** addressListView *** -->
+
+<section uk-height-viewport="expand: true" class="uk-section uk-background-muted">
+
+	<!-- main-container start -->
+	<!-- ==================== -->
+	<div class="uk-container"> <!-- container start -->
+
+		<!-- page-title start -->
+		<!-- ================ -->
+		<div class="uk-text-center">
+			<h1 class="uk-heading uk-text-uppercase">{{'Addresses' | r | xlat}}</h1>
+			<div class="uk-divider-small"></div>
+		</div>
+
+		<loadingindicator ng-show="loading" />
+
+		<div class="uk-card uk-card-small uk-card-default">
+			<div class="uk-card-header">
+				<h3 class="uk-card-title">{{('Address' | r) + ' ' + ('List' | r) | xlat }}</h3>
+			</div>
+
+			<div class="uk-card-body">
+				<div class="uk-margin uk-text-center">
+					<form name="searchForm" class="uk-margin-small" ng-submit="search()">
+						<div class="uk-inline uk-width-1-3">
+							<span class="uk-form-icon" uk-icon="icon: search"></span>
+							<input class="uk-input" type="search" placeholder="{{('Search' | r) + ' ' + ('Addresses' | r) | xlat}}" ng-model="searchTerm">
+						</div>
+						<div class="uk-margin-small">
+							<button type="submit" class="uk-button uk-button-primary">{{'Search' | r | xlat}}</button>
+						</div>
+					</form>
+				</div>
+
+				<div ng-show="!addresses.length > 0">
+					<hr/>
+					<div class="uk-text-center">
+						<h3>{{'Your search resulted in no records. Please refine your search.' | r | xlat}}</h3>
+						<button type="button" class="uk-button uk-button-primary uk-margin" ng-click="newAddress($event)">{{'Add an' + ' ' + ('address' | rc) + ' ' + 'now' | xlat}}</button>
+					</div>
+				</div>
+
+				<div ng-show="addresses.length > 0">
+					<hr/>
+					<div class="uk-container">
+						<table class="uk-table uk-margin-remove">
+							<thead>
+								<tr>
+									<th class="uk-padding-remove-top"><input class="uk-checkbox" type='checkbox' ng-click="checkAll($event)" /></th>
+									<th class="uk-padding-remove-top">{{'Name' | r}}</th>
+									<th class="uk-padding-remove-top">{{'Street1' | r}}</th>
+									<th class="uk-padding-remove-top">{{'Street2' | r}}</th>
+									<th class="uk-padding-remove-top">{{'City' | r}}</th>
+									<th class="uk-padding-remove-top">{{'State' | r}}</th>
+									<th class="uk-padding-remove-top">Postcode</th>
+									<th class="uk-padding-remove-top">{{'Shipping' | r}}</th>
+									<th class="uk-padding-remove-top">{{'Billing' | r}}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="address in addresses | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+									<td class="uk-padding-remove-top"><input class="uk-checkbox" type='checkbox' ng-model="address.Selected" ng-show="address.IsCustEditable" /></td>
+									<td class="uk-padding-remove-top"><a ng-href="address/{{address.ID}}" ng-if="address.IsCustEditable">{{address.AddressName}}</a><span ng-if="!address.IsCustEditable">{{address.AddressName}}</span></td>
+									<td class="uk-padding-remove-top">{{address.Street1}}</td>
+									<td class="uk-padding-remove-top">{{address.Street2}}</td>
+									<td class="uk-padding-remove-top">{{address.City}}</td>
+									<td class="uk-padding-remove-top">{{address.State}}</td>
+									<td class="uk-padding-remove-top">{{address.Zip}}</td>
+									<td class="uk-padding-remove-top"><i ng-class="{'fa fa-check': address.IsShipping }"></i></td>
+									<td class="uk-padding-remove-top"><i ng-class="{'fa fa-check': address.IsBilling }"></i></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div ng-show="addresses.length > 0">
+					<div ng-show="settings.listCount > settings.pageSize">
+						<pagination page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+						items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}" first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+					</div>
+					<button type="button" class="uk-button uk-button-danger" ng-click="deleteSelected($event)" ng-disabled="(addresses | filter:{Selected:true}).length == 0">{{('Delete' | r) + ' ' + ('Selected' | r) | xlat}}</button>
+					<button ng-if="user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress')" type="button" class="uk-button uk-button-primary uk-float-right" ng-click="newAddress($event)">{{('New' | r) + ' ' + ('Address' | r) | xlat}}</button>
+				</div>
+			</div> <!-- Panel body -->
+
+		</div>	<!-- Panel -->
+
+		<div class="navbar-fixed-bottom">
+			<loadingindicator ng-show="displayLoadingIndicator" />
+			<div class="view-action-message alert-success" ng-show="actionMessage">{{actionMessage | r | xlat}}</div>
+		</div>
+	</div> <!-- container -->
+</section> <!-- section -->

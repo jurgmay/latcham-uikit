@@ -1,0 +1,7 @@
+<!-- *** customCheckBoxField *** -->
+
+<div class="uk-margin-small uk-grid-small uk-child-width-auto uk-grid">
+    <label ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name}}
+        <input class="uk-checkbox" type="checkbox" ng-true-value="{{checked}}" ng-false-value="{{unchecked}}" ng-model="customfield.Value">
+    </label>
+</div>

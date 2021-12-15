@@ -1,0 +1,56 @@
+<!-- *** pendingApprovalReport *** -->
+
+<div class="uk-container">
+  <div class="uk-form-horizontal">
+    <div class="uk-margin-small">
+      <label class="uk-form-label" for="form-horizontal-text">{{'Name' | r | xlat}}</label>
+      <div class="uk-form-controls">
+        <input required class="uk-input uk-form-width-large" id="form-horizontal-text" type="text" ng-model="report.Name" placeholder="{{'Name' | r | xlat}}" />
+        <button type="submit" ng-disabled="reportForm.$invalid" class="uk-button uk-button-primary">
+          <span>{{'Save' | r | xlat}}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="uk-grid uk-child-width-1-2">
+    <div>
+      <div class="uk-form-horizontal">
+        <h3>{{'Conditions' | r | xlat}}</h3>
+        <div class="uk-margin-small">
+          <label class="uk-form-label">{{'Category' | r | xlat}}</label>
+          <div class="uk-form-controls">
+            <select class="uk-select uk-form-width-large" id="form-horizontal-select" ng-options="key as value for (key,value) in report.CategoryOptions" ng-model="report.Category"><option value=""></option></select>
+          </div>
+        </div>
+        <div class="uk-margin-small">
+          <label class="uk-form-label">{{'Approver' | r | xlat}}</label>
+          <div class="uk-form-controls">
+            <select class="uk-select uk-form-width-large" id="form-horizontal-select" ng-options="key as value for (key,value) in report.UserOptions" ng-model="report.User"><option value=""></option></select>
+          </div>
+        </div>
+        <div class="uk-margin-small">
+          <label class="uk-form-label">{{'Approver' | r | xlat}}</label>
+          <div class="uk-form-controls">
+            <select class="uk-select uk-form-width-large" id="form-horizontal-select" ng-options="key as value for (key,value) in report.UserOptions" ng-model="report.User"><option value=""></option></select>
+          </div>
+        </div>
+        <div class="uk-margin-small" ng-if="report.CostCenterOptions.length > 0">
+          <label class="uk-form-label">{{'Cost Center' | r | xlat}}</label>
+          <div class="uk-form-controls">
+            <select class="uk-select uk-form-width-large" id="form-horizontal-select" ng-options="key as value for (key,value) in report.CostCenterOptions" ng-model="report.CostCenter"><option value=""></option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="uk-form">
+        <h3>{{'Display Columns' | r | xlat}}</h3>
+        <div class="uk-margin-small">
+          <div class="">
+            <select multiple size="17" required class="uk-select" ng-options="key as (value | xlat) for (key,value) in report.ColumnOptions" ng-model="report.SelectedColumns"><option value=""></option></select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

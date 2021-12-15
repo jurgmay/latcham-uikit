@@ -1,0 +1,43 @@
+<!-- *** dropbox *** -->
+
+<script type="text/javascript">
+	SpecController.$inject = ['$scope', 'Resources'];
+    function SpecController($scope, Resources) {
+        function setFilenameSpec(filename){
+            $scope.LineItem.Specs.DropboxFilename.Value = filename;
+        }
+        function uploadFile() {
+          var results = document.getElementById('results');
+          results.innerHTML = "<i class='fa fa-spinner fa-spin'></i>";
+          var ACCESS_TOKEN = Resources.dropKey;
+          var dbx = new Dropbox({ accessToken: ACCESS_TOKEN });
+          var fileInput = document.getElementById('file-upload');
+          var file = fileInput.files[0];
+          var d = new Date();
+          var n = d.toUTCString();
+          var tempname = n + "_" + file.name;
+          dbx.filesUpload({path: '/' + tempname, contents: file})
+            .then(function(response) {
+              results.innerHTML = 'File uploaded!';
+              $scope.LineItem.loadingFile = false;
+              setFilenameSpec(response.name);
+            })
+            .catch(function(error) {
+              console.error(error);
+            });
+          return false;
+        }
+        $("#file-upload").bind('change', function(event) {
+            if(!event) return;
+            if(event.target.files.length > 0){
+             uploadFile();   
+            }
+            else{
+                var results = document.getElementById('results');
+                results.innerHTML = "";
+                $scope.LineItem.loadingFile = false;
+                setFilenameSpec("");
+            }
+        });
+    }
+</script>

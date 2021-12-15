@@ -1,0 +1,36 @@
+<!-- *** checkoutButtons *** -->
+
+<!-- cancel button -->
+<!-- ================ -->
+<div class="uk-float-left">
+	<div>
+		<button type="button" class="uk-button uk-button-small uk-button-danger uk-margin-small-right" ng-click="currentOrder.Status == 'AwaitingApproval' ? cancelEdit() : cancelOrder()">
+			<span ng-if="currentOrder.Status != 'AwaitingApproval'">{{('Cancel' | r) + ' ' + ('Order' | r) | xlat}}</span>
+			<span ng-if="currentOrder.Status == 'AwaitingApproval'">{{('Cancel' | r) + ' ' + ('Edit' | r) | xlat}}</span>
+		</button>
+	</div>
+</div> <!-- row end -->
+
+<!-- continue shopping, save cart and checkout buttons -->
+<!-- ================================================= -->
+<div class="uk-float-right">
+	<div>
+		<button type="button" class="uk-button uk-button-small uk-button-default uk-margin-small-left" redirect="catalog">
+			<span class="uk-visible@s">{{'Continue Shopping' | r | xlat}}</span>
+			<span class="uk-hidden@s">{{'Shop' | r | xlat}}</span>
+		</button>
+
+		<button type="submit" class="uk-button uk-button-small uk-button-default uk-margin-small-left" ng-click="saveChanges()">
+			<span class="fa fa-spinner fa-spin" ng-show="displayLoadingIndicator"></span>
+			<span ng-show="displayLoadingIndicator"> Saving...</span>
+			<span ng-hide="displayLoadingIndicator">{{('Save' | r) + ' ' + ('Order' | r) | xlat}}</span>
+		</button>
+
+		<button class="uk-button uk-button-small uk-button-primary uk-margin-small-left"
+                ng-class="{'uk-button-warning': cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid || submitClicked, 'uk-button-success': !cart_shipping.$invalid && !cart_order.$invalid && !cart_billing.$invalid || !submitClicked }"
+                ng-click="submitOrder()" ng-disabled="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid || submitClicked">
+            <i ng-show="cart_shipping.$invalid || cart_order.$invalid || cart_billing.$invalid || submitClicked" class="fa fa-warning"></i>
+            <span>{{('Submit' | r) + ' ' + ('Order' | r) | xlat}}</span>
+        </button>
+	</div>
+</div> <!-- row end -->

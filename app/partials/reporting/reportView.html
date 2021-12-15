@@ -1,0 +1,86 @@
+<!-- *** ReportView *** -->
+<section uk-height-viewport="expand: true" class="uk-section uk-background-muted">
+
+	<!-- main-container start -->
+	<!-- ==================== -->
+  <div class="uk-container">
+		<!-- page-title start -->
+		<!-- ================ -->
+		<div class="uk-text-center">
+			<h1 class="uk-heading uk-text-uppercase">Reports</h1>
+			<div class="uk-divider-small"></div>
+		</div>
+		<!-- page-title end -->
+
+    <div class="uk-margin-small">
+      <a ng-href="reports" class="uk-button uk-button-primary ng-binding" type="button">{{('View' | r) + ' ' + ('Reports' | r) | xlat}}</a>
+		</div>
+
+		<section>
+			<form name="reportForm" ng-submit="saveReport()">
+				<div class="panel panel-default">
+					<loadingindicator ng-show="displayLoadingIndicator" />
+
+					<div class="panel-heading" ng-if="!report.ID">
+						<h3 class="panel-title panel-primary">{{report.ID ? report.Name : (report.ReportTypeName | r | xlat)}}</h3>
+					</div>
+
+          <ul uk-tab ng-show="report">
+            <li class="uk-active"><a href="">{{'Conditions' | r | xlat}}</a></li>
+            <li ng-click="downloadReport(report)" disabled="!report.ID"><a>{{('Report' | r) + ' ' + ('Data' | r) | xlat}}</a></li>
+          </ul>
+
+          <ul class="uk-switcher uk-margin">
+            <li>
+              <div>
+                <lineitemreport ng-if="report.ReportType == 'LineItem'" />
+								<orderreport ng-if="report.ReportType == 'Order'" />
+								<inventoryreport ng-if="report.ReportType == 'Inventory'" />
+								<pendingapprovalreport ng-if="report.ReportType == 'PendingApproval'" />
+								<accountStatusReport ng-if="report.ReportType == 'SpendingAccountStatus'" />
+								<accounttransactionreport ng-if="report.ReportType == 'SpendingAccountTransaction'" />
+								<shipmentreport ng-if="report.ReportType == 'Shipment'" />
+              </div>
+            </li>
+            <li>
+              <div class="">
+                <table class="uk-table uk-table-striped uk-table-small">
+                  <thead>
+                    <tr>
+                      <td ng-repeat="(key, value) in report.DataColumns">{{report.DisplayColumns[value] | r | xlat}}</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr ng-repeat="row in report.Data | paginate:(settings.currentPage-1) * settings.pageSize | limitTo:settings.pageSize">
+                      <td ng-repeat="header in report.DataColumns">
+                        <span ng-if="header.indexOf('Date') == -1">{{row[header]}}</span>
+                        <span ng-if="header.indexOf('Date') > -1">{{row[header] | date:user.Culture.DateFormat.long}}</span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="panel-footer">
+  								<div ng-show="settings.listCount > settings.pageSize">
+  									<pagination class="uk-pagination" page="settings.currentPage" max-size="8" rotate="false" boundary-links="true" total-items="settings.listCount"
+  												items-per-page="settings.pageSize" direction-links="true" previous-text="{{'Previous' | xlat}}" next-text="{{'Next' | xlat}}"
+  												first-text="{{'First' | xlat}}" last-text="{{'Last' | xlat}}"></pagination>
+  								</div>
+  								<button ng-hide="errorMessage" type="button" class="uk-button uk-button-primary" ng-click="getDownload()">{{'Download' | r | xlat}}</button>
+  							</div>
+
+              </div>
+            </li>
+          </ul>
+
+					<div class="uk-alert uk-text-center" ng-show="actionMessage">
+						<p>{{actionMessage | r | xlat}}</p>
+					</div>
+					<div class="uk-alert-danger uk-text-center" ng-show="errorMessage">
+						<p>{{errorMessage | r | xlat}}</p>
+					</div>
+				</div>
+			</form>
+		</section>
+	</div>
+</section>

@@ -1,0 +1,33 @@
+<!-- *** staticspecs *** -->
+
+<div class="uk-padding-small" ng-if="length > 0">
+	<ul class="uk-list uk-margin-remove" ng-repeat="sg in specgroups" ng-show="hasvisiblechild(sg.Specs)">
+		<h4 class="uk-margin-small">{{sg.Name | uppercase}}</h4>
+
+		<li class="" ng-show="sg.Name == 'Pricing'">
+			<div class="451qa_spec_item" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
+				<div>
+					<div>
+						<span class="">{{s.Name | xlat}}</span>
+					</div>
+					<div>
+						<span class="">{{s.Value | xlat}}</span>
+					</div>
+				</div>
+			</div>
+		</li>
+
+		<li class="" ng-hide="sg.Name == 'Pricing'">
+			<div class="451qa_spec_item" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
+				<div>
+					<div>
+						<span class="">{{s.Name | xlat}}</span>
+						<br/>
+						<a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value | xlat}}</a>
+						<span ng-if="!s.FileURL">{{s.Value | xlat}}</span>
+					</div>
+				</div>
+			</div>
+		</li>
+	</ul>
+</div>

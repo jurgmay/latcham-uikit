@@ -1,0 +1,103 @@
+<!-- *** nav *** -->
+
+<div class="uk-background-default nav-border" uk-sticky="sel-target: .uk-navbar-container; cls-active: uk-navbar-sticky">
+	<div class="uk-container">
+		<div "uk-navbar-container uk-light" uk-navbar>
+			<div class="uk-navbar-left">
+				<a class="uk-navbar-item uk-logo" id="logo" href="index.html"><img alt="Latcham logo" id="logo_img" src="https://www.four51.com/Themes/Custom/9837598c-9484-4abd-96bb-67077caec569/assets/latcham/latcham-logo.png"></a>
+			</div>
+
+			<div class="uk-navbar-right">
+				<!-- main-menu -->
+				<ul class="uk-navbar-nav">
+					<li class="uk-animation-slide-left" ng-class="{'ng-hide': isActive('catalog')}">
+						<a href back-step class="back" uk-icon="icon: arrow-left">
+						</a>
+					</li>
+					<li ng-class="{'active': isInPath('catalog') || isInPath('product') || isInPath('cart/default') || isInPath('search')}">
+						<a id="451qa_home_link" ng-show="Four51User.isAuthenticated()" href="catalog">
+							<span class="uk-visible@m">{{'Products' | rc | xlat}}</span>
+						</a>
+					</li>
+					<li ng-if="user.Type == 'Customer'" ng-class="{'active': isActive('order'), 'active-xs': isActive('favoriteorders')}">
+						<a id="451qa_order_link" href="order">
+							<span class="uk-visible@m">{{'Orders' | r | xlat}}</span>
+						</a>
+					</li>
+					<li ng-if="user.Type == 'Customer' && user.Permissions.contains('AdvancedReporting')" ng-class="{'active': isActive('reports')}">
+						<a id="451qa_order_link" href="reports">
+							<span class="uk-visible@m">{{'Reports' | r | xlat}}</span>
+						</a>
+					</li>
+					<li id="451qa_mesg_link" class="contactus" ng-show="user.Permissions.contains('ViewContactUs')">
+						<a id="451qa_order_link" href="contactus">
+							<span class="uk-visible@m">{{'Contact Us' | r | xlat}}</span>
+						</a>
+					</li>
+					<li class="admin-user uk-visible@m" ng-class="{'active': isActive(['admin', 'addresses', 'address', 'messages', 'message', 'favoriteorders'])}">
+						<a id="451qa_acct_link2" class="dropdown-toggle" data-toggle="dropdown">
+							<span class="uk-visible@m">{{'Account' | r | xlat}}</span>
+						</a>
+
+						<div class="uk-navbar-dropdown">
+							<ul class="uk-nav uk-navbar-dropdown-nav">
+								<li id="451qa_user_link" ng-show="user.Permissions.contains('ViewSelfAdmin')">
+									<a href="admin">
+										{{'User Information' | r | xlat}}
+									</a>
+								</li>
+								<li id="451qa_addy_link" ng-show="user.Type == 'Customer' && (user.Permissions.contains('CreateShipToAddress') || user.Permissions.contains('CreateBillToAddress'))">
+									<a href="addresses">
+										{{'My ' + 'Addresses' | r | xlat}}
+									</a>
+								</li>
+								<li id="451qa_mesg_link" ng-show="user.Type == 'Customer' && user.Permissions.contains('ViewMessaging')">
+									<a href="message">
+										{{'My ' + 'Messages' | r | xlat}}
+									</a>
+								</li>
+								<li ng-show="user.Type == 'Customer'">
+									<a id="451qa_fave_link" href="favoriteorders">
+										{{'Favorites' | r | xlat}}
+									</a>
+								</li>
+								<li class="uk-nav-divider" ng-if="user.Permissions.contains('MultipleShoppingCart') && currentOrder"></li>
+								<li>
+									<a href="#" neworder ng-if="user.Permissions.contains('MultipleShoppingCart') && currentOrder" ng-click="newOrderLoadingIndicator = true;startNewOrder()">
+										{{"Start" | r | xlat}} {{"New" | r | xlat}} {{"Order" | r | xlat}}
+									</a>
+								</li>
+								<li class="uk-nav-divider" ng-show="user.Type!='TempCustomer' || AppConst.debug"></li>
+								<li id="451qa_mesg_link" ng-show="user.Permissions.contains('ViewContactUs')">
+									<a href="contactus">
+										{{'Contact Us' | r | xlat}}
+									</a>
+								</li>
+								<li class="uk-nav-divider" ng-show="user.Type!='TempCustomer' || AppConst.debug"></li>
+								<li ng-show="user.Type!='TempCustomer'">
+									<a href="#"  class="451_btn_logout" ng-click="Logout()">
+										<span>{{'Log Out' | r | xlat}}</span>
+									</a>
+								</li>
+								<li ng-if="AppConst.debug">
+									<a href="#" ng-click="Clear()">
+										<span>Clear Cache</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+					<li class="viewcart">
+						<a href="cart">
+							<div class="uk-button-default uk-text-center cart-icon" ng-class="{'active': isActive(['cart', 'checkout'])}" data-toggle="" type="button">
+								<i class="fa fa-shopping-basket"></i>
+								<span class="uk-badge cart-count default-bg" ng-bind="cartCount" ng-show="cartCount > 0"></span>
+							</div>
+						</a>
+					</li>
+				</ul>
+				<!-- main-menu end -->
+			</div>
+		</div>
+	</div>
+</div>
