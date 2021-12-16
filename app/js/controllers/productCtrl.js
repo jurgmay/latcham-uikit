@@ -155,7 +155,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 
   $scope.quantityText = function() {
     return "Quantity text";
-  }
+  };
 
 	$scope.setOrderType = function(type) {
 		$scope.loadingIndicator = true;
