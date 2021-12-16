@@ -28,20 +28,20 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		if (lineitem.PriceSchedule && lineitem.PriceSchedule.DefaultQuantity != 0)
 			$scope.LineItem.Quantity = lineitem.PriceSchedule.DefaultQuantity;
 	}
-	
+
 	/*social*/
 	$scope.encodeComponent = function(value) {
 		return encodeURIComponent(value);
 	};
 	/*social*/
-		
+
 	function init(searchTerm, callback) {
 		ProductDisplayService.getProductAndVariant($routeParams.productInteropID, $routeParams.variantInteropID, function (data) {
 			$scope.LineItem.Product = data.product;
 			$scope.LineItem.Variant = data.variant;
 			ProductDisplayService.setNewLineItemScope($scope);
 			ProductDisplayService.setProductViewScope($scope);
-			
+
 			/*social*/
 			$scope.LineItem.ShareName = $scope.LineItem.Product.Name.replace(/&/g, "and");
 			$scope.tumblr_link_url = $location.absUrl();
@@ -57,7 +57,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
                         href: $scope.LineItem.Variant.PreviewUrl
 					});
 			}
-			
+
 			$scope.feedFB = function(post){
 				FB.ui(
 					{
@@ -71,7 +71,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 					});
 			}
 			/*social*/
-			
+
 			setDefaultQty($scope.LineItem);
 			$scope.$broadcast('ProductGetComplete');
 			$scope.loadingIndicator = false;
@@ -153,6 +153,10 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 		);
 	};
 
+  $scope.quantityText = function() {
+    return "Quantity text";
+  }
+
 	$scope.setOrderType = function(type) {
 		$scope.loadingIndicator = true;
 		$scope.currentOrder = { 'Type': type };
@@ -160,10 +164,10 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.loadingIndicator = false;
 		});
 	};
-	
+
 	$scope.showErrorModal = function() {
 
-		// UIkit.modal.dialog('<p>UIkit dialog!</p>');	
+		// UIkit.modal.dialog('<p>UIkit dialog!</p>');
 
 		// your logic goes here
 		return true;
