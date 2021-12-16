@@ -49,6 +49,8 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.tumblr_link_description = "Check out the " + $scope.tumblr_link_name + " on the COBC Site!";
 			$scope.twitter_link_description = "Check out the " + $scope.tumblr_link_name + " on the COBC Site!";
 
+      $scope.quantityText = "Quantity text";
+
 			$scope.shareFB = function(post){
 				FB.ui(
 					{
@@ -80,6 +82,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 				callback();
 		}, $scope.settings.currentPage, $scope.settings.pageSize, searchTerm);
 	}
+
 	$scope.$watch('settings.currentPage', function(n, o) {
 		if (n != o || (n == 1 && o == 1))
 			init($scope.searchTerm);
@@ -152,10 +155,6 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 				}
 		);
 	};
-
-  $scope.quantityText = function() {
-    return "Quantity text";
-  };
 
 	$scope.setOrderType = function(type) {
 		$scope.loadingIndicator = true;
