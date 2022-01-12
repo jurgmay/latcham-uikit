@@ -53,8 +53,10 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
         $scope.unitofmeasure_text = '';
       } else {
         var unitOfMeasureText = $scope.LineItem.Product.UnitOfMeasure;
+        var quantityMultiplier = $scope.LineItem.PriceSchedule.QuantityMultiplier ;
         var unitOfMeasure = parseInt(unitOfMeasureText.replace(/[^0-9]/g,''),10);
-        $scope.unitofmeasure_text = '(' + ( $scope.LineItem.PriceSchedule.QuantityMultiplier / unitOfMeasure ) + ' ' + $scope.LineItem.Product.UnitOfMeasure + ')';
+        var batches = {{inventoryDisplay(LineItem.Product, LineItem.Variant) | number : 0}} / quantityMultiplier / ( quantityMultiplier / unitOfMeasure );
+        $scope.unitofmeasure_text = '(' batches + ' x ' + ( quantityMultiplier / unitOfMeasure ) + ' ' + unitOfMeasureText + ')';
       }
 
       if ( $scope.LineItem.Product.UnitOfMeasure === '' ) {
