@@ -54,7 +54,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
       } else {
         var unitOfMeasureText = $scope.LineItem.Product.UnitOfMeasure;
         var unitOfMeasure = parseInt(unitOfMeasureText.replace(/[^0-9]/g,''),10);
-        $scope.unitofmeasure_text = '(' + ( $scope.LineItem.PriceSchedule.QuantityMultiplier / unitOfMeasure ) + $scope.LineItem.Product.UnitOfMeasure + ')';
+        $scope.unitofmeasure_text = '(' + ( $scope.LineItem.PriceSchedule.QuantityMultiplier / unitOfMeasure ) + ' ' + $scope.LineItem.Product.UnitOfMeasure + ')';
       }
 
       if ( $scope.LineItem.Product.UnitOfMeasure === '' ) {
