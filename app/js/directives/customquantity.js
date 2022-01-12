@@ -10,7 +10,7 @@ four51.app.directive('customquantity', ['$451', 'ProductDisplayService', functio
             '</div>',
         link: function(scope){
           $scope.getQtyText = function(lineitem){
-              var qtyText = lineitem.PriceSchedule.QuantityMultiplier;
+              var qtyText = '999,999'; // lineitem.PriceSchedule.QuantityMultiplier
 
               return qtyText;
           };
