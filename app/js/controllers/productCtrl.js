@@ -49,7 +49,11 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.tumblr_link_description = "Check out the " + $scope.tumblr_link_name + " on the COBC Site!";
 			$scope.twitter_link_description = "Check out the " + $scope.tumblr_link_name + " on the COBC Site!";
 
-      $scope.quantity_text = $scope.LineItem.PriceSchedule.QuantityMultiplier;
+      if ( $scope.LineItem.Product.UnitOfMeasure === '' ) {
+        $scope.quantity_text = 'Empty';
+      } else {
+        $scope.quantity_text = 'Supplied in ' + $scope.LineItem.Product.UnitOfMeasure + ' of ' + $scope.LineItem.PriceSchedule.QuantityMultiplier;
+      }
 
 			$scope.shareFB = function(post){
 				FB.ui(
