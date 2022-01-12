@@ -3,8 +3,15 @@ four51.app.directive('customquantity', function() {
     restrict: 'E',
     templateUrl: 'partials/controls/customQuantity.html',
 	   controller: ['$scope', function($scope) {
-       var qtyText = lineitem.PriceSchedule.QuantityMultiplier;
-       $scope.quantity_text = qtyText;
+       var quantityMultiplier = lineitem.PriceSchedule.QuantityMultiplier;
+       var unitOfMeasure = lineitem.Product.UnitOfMeasure;
+
+       if ( unitOfMeasure === '' ) {
+         $scope.quantity_text = '';
+       } else {
+         $scope.quantity_text = 'Supplied in ' + unitOfMeasure + ' of ' + quantityMultiplier;
+       }
+
      }]
    }
    return obj;
