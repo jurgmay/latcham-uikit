@@ -50,7 +50,15 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
 			$scope.twitter_link_description = "Check out the " + $scope.tumblr_link_name + " on the COBC Site!";
 
       if ( $scope.LineItem.Product.UnitOfMeasure === '' ) {
-        $scope.quantity_text = 'Empty';
+        $scope.unitofmeasure_text = '';
+      } else {
+        var unitOfMeasureText = $scope.LineItem.Product.UnitOfMeasure;
+        var unitOfMeasure = parseInt(unitOfMeasureText.replace(/[^0-9]/g,''),10);
+        $scope.unitofmeasure_text = '(' + ( $scope.LineItem.PriceSchedule.QuantityMultiplier / unitOfMeasure ) + $scope.LineItem.Product.UnitOfMeasure + ')';
+      }
+
+      if ( $scope.LineItem.Product.UnitOfMeasure === '' ) {
+        $scope.quantity_text = '';
       } else {
         $scope.quantity_text = 'Supplied in ' + $scope.LineItem.Product.UnitOfMeasure + ' of ' + $scope.LineItem.PriceSchedule.QuantityMultiplier;
       }
