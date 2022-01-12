@@ -157,7 +157,7 @@
 													ng-model="item.DateNeeded"
 													ng-required="user.Permissions.contains('DateNeededRequired')"
 													type="text"
-													class="uk-input uk-form-small flatpickr flatpickr-input"
+													class="uk-input flatpickr flatpickr-input"
 												/>
 											</div>
 											<span ng-hide="item.DateNeeded && user.Permissions.contains('DateNeededRequired')" class="uk-text-small uk-text-danger uk-margin-remove uk-text-nowrap">This field requires a value</span>
@@ -298,7 +298,7 @@
 											</li>
 											<li class="text-center">
 												<ul ng-class="{'one': errorSection == 'open', 'two': errorSection == '' }">
-													<li ng-if="cart.dateneeded.$invalid">{{('Date needed' | r) +  ' is ' +  ('Required' | rl) | xlat}}</li>
+													<li ng-if="cart.dateneeded.$invalid">{{('Date needed' | r) + ' is ' + ('Required' | rl) | xlat}}</li>
 													<li ng-if="cart.costcenter.$invalid">{{('Cost Center' | r) + ' is ' + ('Required' | rl) | xlat}}</li>
 													<li ng-if="cart.qtyInput.$invalid">{{'You have entered an invalid ' + ('Quantity' | rl) | xlat}}</li>
 													<li ng-if="cart.kitValidation.$invalid">{{'The kit has unconfigured items. You must configure them before continuing.' | r | xlat}}</li>
