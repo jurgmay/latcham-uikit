@@ -56,7 +56,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
         var quantityMultiplier = $scope.LineItem.PriceSchedule.QuantityMultiplier ;
         var unitOfMeasure = parseInt(unitOfMeasureText.replace(/[^0-9]/g,''),10);
         var batches = {{inventoryDisplay(LineItem.Product, LineItem.Variant) | number : 0}} / quantityMultiplier / ( quantityMultiplier / unitOfMeasure );
-        $scope.unitofmeasure_text = '(' batches + ' x ' + ( quantityMultiplier / unitOfMeasure ) + ' ' + unitOfMeasureText + ')';
+        $scope.unitofmeasure_text = '(' + batches + ' x ' + ( quantityMultiplier / unitOfMeasure ) + ' ' + unitOfMeasureText + ')';
       }
 
       if ( $scope.LineItem.Product.UnitOfMeasure === '' ) {
