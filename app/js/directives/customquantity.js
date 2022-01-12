@@ -1,20 +1,11 @@
-four51.app.directive('customquantity', ['$451', 'ProductDisplayService', function($451, ProductDisplayService){
+four51.app.directive('customquantity', function() {
     var obj = {
-        scope: {
-            lineitem : '=',
-            calculated: '='
-        },
         restrict: 'E',
-        template: '<div>'+
-            '<p>Quantity: {{getQtyText(lineitem)}}</p>'+
-            '</div>',
-        link: function(scope){
-          $scope.getQtyText = function(lineitem){
-              var qtyText = '999,999'; // lineitem.PriceSchedule.QuantityMultiplier
-
-              return qtyText;
-          };
-        }
+        templateUrl: 'partials/controls/customQuantity.html',
+	    controller: ['$scope', function($scope) {
+			var d = new Date();
+		    $scope.custom_quantity = 999999;
+	    }]
     }
     return obj;
-}]);
+});
