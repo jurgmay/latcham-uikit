@@ -52,10 +52,11 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
       if ( $scope.LineItem.Product.UnitOfMeasure === '' ) {
         $scope.unitofmeasure_text = '';
       } else {
+        var quantityAvailable = $scope.LineItem.Product.QuantityAvailable;
         var unitOfMeasureText = $scope.LineItem.Product.UnitOfMeasure;
         var quantityMultiplier = $scope.LineItem.PriceSchedule.QuantityMultiplier ;
         var unitOfMeasure = parseInt(unitOfMeasureText.replace(/[^0-9]/g,''),10);
-        var batches = $scope.LineItem.Product / quantityMultiplier / ( quantityMultiplier / unitOfMeasure );
+        var batches = quantityAvailable / quantityMultiplier;
         $scope.unitofmeasure_text = '(' + batches + ' x ' + ( quantityMultiplier / unitOfMeasure ) + ' ' + unitOfMeasureText + ')';
       }
 
