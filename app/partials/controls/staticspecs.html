@@ -17,6 +17,7 @@
 			</div>
 		</li>
 
+		<!--
 		<li class="" ng-hide="sg.Name == 'Pricing'">
 			<div class="451qa_spec_item" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
 				<div>
@@ -30,6 +31,7 @@
 			</div>
 		</li>
 	</ul>
+	-->
 
 	<div ng-hide="sg.Name == 'Pricing'">
 		<div ng-repeat="sg in specgroups" ng-show="hasvisiblechild(sg.Specs)">
@@ -38,10 +40,8 @@
 					{{s.Name | xlat}}
 				</dt>
 		    <dd>
-					<div>
-						<a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value | xlat}}</a>
-						<span ng-if="!s.FileURL">{{s.Value | xlat}}</span>
-					</div>
+					<a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value | xlat}}</a>
+					<span ng-if="!s.FileURL">{{s.Value | xlat}}</span>
 				</dd>
 			</dl>
 		</div>
