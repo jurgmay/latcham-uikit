@@ -30,4 +30,13 @@
 			</div>
 		</li>
 	</ul>
+
+	<dl class="uk-description-list uk-description-list-divider" ng-show="s.VisibleToCustomer">
+	    <dt>{{s.Name | xlat}}</dt>
+	    <dd ng-repeat="s in sg.Specs">
+				<a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value | xlat}}</a>
+				<span ng-if="!s.FileURL">{{s.Value | xlat}}</span>
+			</dd>
+	</dl>
+
 </div>
