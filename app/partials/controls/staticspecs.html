@@ -31,7 +31,7 @@
 		</li>
 	</ul>
 
-	<dl class="uk-description-list uk-description-list-divider" ng-show="s.VisibleToCustomer">
+	<dl class="uk-description-list uk-description-list-divider" ng-repeat="sg in specgroups" ng-show="hasvisiblechild(sg.Specs)">
 	    <dt>{{s.Name | xlat}}</dt>
 	    <dd ng-repeat="s in sg.Specs">
 				<a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value | xlat}}</a>
