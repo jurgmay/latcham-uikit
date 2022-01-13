@@ -63,7 +63,7 @@ function ($scope, $routeParams, $route, $location, $451, Product, ProductDisplay
       if ( $scope.LineItem.Product.UnitOfMeasure === '' ) {
         $scope.quantity_text = '';
       } else {
-        $scope.quantity_text = 'Supplied in ' + $scope.LineItem.Product.UnitOfMeasure';
+        $scope.quantity_text = 'Supplied in ' + $scope.LineItem.Product.UnitOfMeasure;
       }
 
 			$scope.shareFB = function(post){
