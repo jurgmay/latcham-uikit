@@ -35,8 +35,8 @@
 
 	<div ng-hide="sg.Name == 'Pricing'">
 		<div ng-repeat="sg in specgroups" ng-show="hasvisiblechild(sg.Specs)">
-			<dl class="uk-description-list uk-description-list-divider">
-				<div ng-repeat="s in sg.Specs" ng-show="s.VisibleToCustomer">
+			<dl>
+				<div class="uk-description-list uk-description-list-divider" ng-repeat="s in sg.Specs" ng-show="s.VisibleToCustomer">
 					<dt>
 						{{s.Name | xlat}}
 					</dt>
