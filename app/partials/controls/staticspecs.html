@@ -35,14 +35,16 @@
 
 	<div ng-hide="sg.Name == 'Pricing'">
 		<div ng-repeat="sg in specgroups" ng-show="hasvisiblechild(sg.Specs)">
-			<dl class="uk-description-list uk-description-list-divider" ng-show="s.VisibleToCustomer" ng-repeat="s in sg.Specs">
-				<dt>
-					{{s.Name | xlat}}
-				</dt>
-		    <dd>
-					<a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value | xlat}}</a>
-					<span ng-if="!s.FileURL">{{s.Value | xlat}}</span>
-				</dd>
+			<dl class="uk-description-list uk-description-list-divider" ng-show="s.VisibleToCustomer">
+				<dl ng-repeat="s in sg.Specs">
+					<dt>
+						{{s.Name | xlat}}
+					</dt>
+			    <dd>
+						<a ng-if="s.FileURL" href={{s.FileURL}}>{{s.Value | xlat}}</a>
+						<span ng-if="!s.FileURL">{{s.Value | xlat}}</span>
+					</dd>
+				</dl>
 			</dl>
 		</div>
 	</div>
