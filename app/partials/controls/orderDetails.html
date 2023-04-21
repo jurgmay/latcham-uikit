@@ -8,6 +8,16 @@
 	</div>
 
 	<form class="uk-form-stacked" name="cart_order" novalidate="">
+
+		<fieldset class="uk-fieldset">
+			<div class="uk-margin-small" ng-if="user.Permissions.contains('Comments')">
+				<label class="uk-form-label">{{'Comments' | r | xlat}}</label>
+				<div class="uk-form-controls">
+					<textarea class="uk-textarea" rows="5" ng-model="currentOrder.Comments" ng-attr-placeholder="You can enter any comments regarding your order here..." />
+				</div>
+			</div>
+		</fieldset>
+
 		<fieldset class="uk-fieldset">
 			<div ng-if="user.Permissions.contains('EditPOID')" ng-invalid>
 				<div class="input-group">
@@ -23,7 +33,7 @@
 			</div>
 		</fieldset>
 
-    <fieldset class="uk-fieldset">
+		<fieldset class="uk-fieldset">
 			<div class="uk-margin-small" ng-show="user.Permissions.contains('CostCenterPerOrder') && !user.Permissions.contains('CostCenterPerLine') && user.CostCenters.length > 0 || user.Permissions.contains('CostCenterPerOrder') && user.Permissions.contains('FreeFormCostCenter')">
 				<div ng-class="{'view-form-select': !currentOrder.CostCenter && user.CostCenters.length > 1, '': currentOrder.CostCenter }">
 					<label class="uk-form-label required">{{'Cost Center' | r | xlat}}</label>
@@ -37,16 +47,7 @@
 				</div>
 			</div>
 		</fieldset>
-
-    <fieldset class="uk-fieldset">
-			<div class="uk-margin-small" ng-if="user.Permissions.contains('Comments')">
-				<label class="uk-form-label">{{'Comments' | r | xlat}}</label>
-				<div class="uk-form-controls">
-					<textarea class="uk-textarea" rows="5" ng-model="currentOrder.Comments" ng-attr-placeholder="You can enter any comments regarding your order here..." />
-				</div>
-			</div>
-		</fieldset>
-
+		
 		<div ng-show="currentOrder.OrderFields">
 			<div ng-repeat="field in currentOrder.OrderFields">
 				<customtextfield customfield="field" ng-if="field.ControlType == 'Text'" ng-required="field.IsRequired" />

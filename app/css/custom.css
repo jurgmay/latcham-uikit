@@ -45,6 +45,12 @@ body {
     font-weight: 400;
 }
 
+.uk-form-blank {
+    background: none;
+    border-color: transparent;
+    padding: 1px;
+}
+
 .uk-legend {
   font-weight: 500;
   margin-bottom: 6px;

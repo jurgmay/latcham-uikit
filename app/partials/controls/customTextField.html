@@ -5,8 +5,9 @@
         <label class="uk-form-label" for="form-stacked-text" ng-class="{required: customfield.Required}">{{customfield.Label || customfield.Name | r}}</label>
         <div class="uk-form-controls">
             <span class="uk-margin-small-right" ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix | r}}</span>
-            <input class="uk-input uk-margin-small" id="form-stacked-text" placeholder="{{customfield.Label || customfield.Name | r}}" size="{{customfield.Width * .13}}" ng-maxlength="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" autocomplete="off" ng-required="customfield.Required" ng-model="customfield.Value"></input>
+            <input class="uk-input" id="form-stacked-text" placeholder="{{customfield.Label || customfield.Name | r}}" size="{{customfield.Width * .13}}" ng-maxlength="{{customfield.MaxLength}}" ui-mask="{{customfield.MaskedInput}}" type="text" autocomplete="off" ng-required="customfield.Required" ng-model="customfield.Value"></input>
             <span class="uk-margin-small-left" ng-if="customfield.Suffix && !hidesuffix && !((customfield.Suffix | r) == '')">{{customfield.Suffix | r}}</span>
+			<p class="uk-text-small uk-text-danger uk-margin-remove uk-text-nowrap" ng-show="!customfield.Value && customfield.Required">Please enter a value</p>
         </div>
     </div>
     <div ng-if="customfield.Lines > 1">
@@ -15,6 +16,7 @@
             <span class="uk-margin-small-right" ng-if="customfield.Prefix && !hideprefix && !((customfield.Prefix | r) == '')">{{customfield.Prefix | r}}</span>
             <textarea wrap="hard" class="uk-textarea uk-margin-small" ng-attr-placeholder="{{customfield.Label || customfield.Name | r}}" cols="{{customfield.Width * .13}} rows={{customfield.Lines}}" ng-maxlength="{{customfield.MaxLength}}" ng-required="customfield.Required" ng-model="customfield.Value" id="form-stacked-text"></textarea>
             <span class="uk-margin-small-left" ng-if="customfield.Suffix && !hidesuffix && !((customfield.Suffix | r) == '')">{{customfield.Suffix | r}}</span>
-        </div>
+			<p class="uk-text-small uk-text-danger uk-margin-remove uk-text-nowrap" ng-show="!customfield.Value && customfield.Required">Please enter a value</p>
+		</div>
     </div>
 </div>

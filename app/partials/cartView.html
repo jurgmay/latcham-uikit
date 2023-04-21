@@ -78,7 +78,7 @@
 												<!-- product description -->
 												<!-- =================== -->
 												<div class="uk-width-expand uk-margin-small-left">
-													<div ng-if="currentOrder.Status != 'AwaitingApproval' || isEditforApproval">
+													<div ng-if="currentOrder.Status != 'AwaitingApproval' || isEditforApproval" class="uk-input uk-form-blank">
 														<a class="uk-text-normal" ng-href="{{(item.Product.Type == 'Kit' ? 'kit' : 'cart') + '/' + (item.Product.InteropID) + '/' + (isEditforApproval ? (currentOrder.ID + '/') : '') + ($index)}}">
 															<p>
 																 <i ng-show="item.KitIsInvalid" class="fa fa-exclamation-triangle"></i>
@@ -130,14 +130,14 @@
 																<li class="uk-open">
 														        <a class="uk-accordion-title" href="#">Specifications</a>
 														        <div class="uk-accordion-content">
-																			<ul class="uk-list uk-list-divider uk-text-small">
-																				<li ng-show="spec.Value" ng-hide="spec.Name.charAt(0) == '@' || spec.Value == '(unspecified)' || spec.Value == ''" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
-																					<span class="uk-text-normal">{{spec.Label || spec.Name}}: </span>
-																					<span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span>
-																					<span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
-																				</li>
-																			</ul>
-																		</div>
+																	<ul class="uk-list uk-list-divider uk-text-small">
+																		<li ng-show="spec.Value" ng-hide="spec.Name.charAt(0) == '@' || spec.Value == '(unspecified)' || spec.Value == ''" ng-repeat="spec in item.Specs | filter:{'CanSetForLineItem':true} ">
+																			<span class="uk-text-normal">{{spec.Label || spec.Name}}: </span>
+																			<span ng-if="spec.ControlType == 'File'"><a ng-href="{{spec.File.Url}}">{{spec.File.OriginalName + Extension}}</a></span>
+																			<span ng-if="spec.ControlType != 'File'">{{spec.Value || ('(unspecified)' | xlat)}}</span>
+																		</li>
+																	</ul>
+																</div>
 														    </li>
 															</ul>
 														</span>
@@ -149,7 +149,7 @@
 										<!--   DATE   -->
 										<!-- ******** -->
 										<td ng-if="user.Permissions.contains('DateNeededRequired') || user.Permissions.contains('DateNeededOptional')">
-											<div>
+											<div class="uk-width-small">
 												<!--Default Datepicker -->
 												<input name="dateneeded"
 													placeholder="{{'Date' | xlat}}"
@@ -160,7 +160,7 @@
 													class="uk-input flatpickr flatpickr-input"
 												/>
 											</div>
-											<span ng-hide="item.DateNeeded && user.Permissions.contains('DateNeededRequired')" class="uk-text-small uk-text-danger uk-margin-remove uk-text-nowrap">This field requires a value</span>
+											<span ng-hide="item.DateNeeded && user.Permissions.contains('DateNeededRequired')" class="uk-text-small uk-text-danger uk-margin-remove uk-text-nowrap">Please enter a value</span>
 											<div>
 												<button type="button" title="{{'copy to all' | r | xlat}}" class="uk-button uk-button-link uk-float-left" value="{{'copy to all' | r | xlat}}" ng-click="copyDateToAll()" ng-show="item.DateNeeded" ng-if="$index == 0 && currentOrder.LineItems.length > 1 && user.CostCenters.length != 1" >
 													Copy date to all items
@@ -176,7 +176,7 @@
 												<option value=""></option>
 											</select>
 											<input name="costcenter" class="uk-input" ng-if="user.Permissions.contains('FreeFormCostCenter')" ng-model="item.CostCenter" type="text" required />
-											<span ng-hide="item.CostCenter && user.Permissions.contains('FreeFormCostCenter')" class="uk-text-small uk-text-danger uk-margin-remove uk-text-nowrap">This field requires a value</span>
+											<span ng-hide="item.CostCenter && user.Permissions.contains('FreeFormCostCenter')" class="uk-text-small uk-text-danger uk-margin-remove uk-text-nowrap">Please enter a value</span>
 											<span ng-if="item.CostCenter.length > 0 && !user.Permissions.contains('FreeFormCostCenter')">{{item.CostCenter}}</span>
 										</td>
 
@@ -184,7 +184,7 @@
 										<!-- UNIT PRICE -->
 										<!-- ********** -->
 										<td ng-if="!(user.Permissions.contains('HidePricing'))">
-											<p class="uk-padding-xsmall">{{item.UnitPrice | culturecurrency}}</p>
+											<p class="uk-input uk-form-blank">{{item.UnitPrice | culturecurrency}}</p>
 										</td>
 
 										<!-- ******** -->
@@ -198,26 +198,24 @@
 										<!-- TOTAL PRICE -->
 										<!-- *********** -->
 										<td ng-if="!(user.Permissions.contains('HidePricing'))">
-											<p class="uk-padding-xsmall">{{item.LineTotal | culturecurrency}}</p>
+											<p class="uk-input uk-form-blank">{{item.LineTotal | culturecurrency}}</p>
 										</td>
 
 										<!-- ************************** -->
 										<!-- BUTTON TO REMOVE LINE ITEM -->
 										<!-- ************************** -->
 										<td class="uk-padding-remove-horizontal">
-											<div class="uk-form-width-xsmall">
-												<p class="uk-padding-xsmall">
-													<a class="uk-text-danger" uk-tooltip="Remove" title="Remove item" aria-expanded="false" ng-click="removeItem(item)">
-														<span uk-icon="close" class="uk-icon"></span>
-													</a>
-												</p>
+											<div class="uk-input uk-form-blank uk-padding-remove-top">
+												<a class="uk-text-danger" uk-tooltip="Remove" title="Remove item" aria-expanded="false" ng-click="removeItem(item)">
+													<span uk-icon="close" class="uk-icon"></span>
+												</a>
 											</div>
 										</td>
 									</tr>
 								</tbody>
 							</table>
 
-              <p class="uk-margin-remove">{{callUpdate()}}</p>
+							<p class="uk-margin-remove">{{callUpdate()}}</p>
 
 								<!-- grand total footer -->
 								<!-- ================== -->
@@ -322,3 +320,4 @@
 		</div> <!-- container end -->
 	</section> <!-- main-container end -->
 </div>
+
