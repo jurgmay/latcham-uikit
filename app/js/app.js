@@ -18,5 +18,5 @@ four51.app = angular.module('451order', [
 	'OrderCloud-AnonRouter',
 	'OrderCloud-SpecForms',
 	'OrderCloud-ProductLightbox',
-	'OrderCloud-LargeAddressListSearch',
+	'OrderCloud-LargeAddressListSearch'
 ]);
